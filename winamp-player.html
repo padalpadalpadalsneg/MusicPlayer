@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Winamp Player</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      overflow: hidden;
+    }
+    * { cursor: none !important; }
+    #app {
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+
+  <script type="module">
+    import Webamp from "https://unpkg.com/webamp@^2";
+
+    const webamp = new Webamp({
+      initialTracks: [
+        {
+          metaData: { artist: "Knx", title: "desires_" },
+          url: "https://cdn.jsdelivr.net/gh/padalpadalpadalsneg/MusicPlayer@main/desires_%20-%20Knx..mp3",
+        },
+        {
+          metaData: { artist: "NewJeans", title: "New Jeans" },
+          url: "https://cdn.jsdelivr.net/gh/padalpadalpadalsneg/MusicPlayer@main/yt5s.io%20-%20NewJeans%20(%E1%84%82%E1%85%B2%E1%84%8C%E1%85%B5%E1%86%AB%E1%84%89%E1%85%B3)%20'New%20Jeans'%20Official%20MV%20(320%20kbps).mp3",
+        },
+      ],
+      __initialWindowLayout: {
+        main:      { position: { top: 0, left: 0 } },
+        equalizer: { position: { top: 116, left: 0 }, closed: true },
+        playlist:  { position: { top: 116, left: 0 }, size: { extraHeight: 4, extraWidth: 0 } },
+      },
+    });
+
+    webamp.renderWhenReady(document.getElementById("app")).then(() => {
+      webamp.store.dispatch({ type: "SET_VOLUME", volume: 10 });
+    });
+
+    webamp.onClose(() => {});
+  </script>
+</body>
+</html>
